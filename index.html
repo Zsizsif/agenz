@@ -132,6 +132,44 @@
   .contact-item a:hover { color: #A9BCE8; }
   .contact-card .btn { margin-top: 10px; width: 100%; justify-content: center; }
 
+
+  /* ===== Quote form ===== */
+  .quote-section { padding: 54px 0 60px; border-top: 1px solid var(--line); background: var(--card); }
+  .quote-inner { max-width: 620px; margin: 0 auto; }
+  .quote-inner h2 { font-size: 30px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .quote-sub { color: var(--ink-soft); margin: 0 0 26px; }
+  .qform { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .qfield { display: flex; flex-direction: column; }
+  .qfield.full { grid-column: 1 / -1; }
+  .qfield label {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--ink-soft); margin-bottom: 6px;
+  }
+  .qfield label .req { color: var(--accent); }
+  .qfield input, .qfield select, .qfield textarea {
+    font-family: inherit; font-size: 16px; color: var(--ink);
+    padding: 12px 14px; border: 1.5px solid var(--line);
+    border-radius: 8px; background: #fff; width: 100%;
+  }
+  .qfield textarea { resize: vertical; min-height: 96px; }
+  .qfield input:focus, .qfield select:focus, .qfield textarea:focus {
+    outline: none; border-color: var(--accent);
+  }
+  /* bots fill hidden fields; humans never see this one */
+  .qhp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .qsubmit { grid-column: 1 / -1; }
+  .qsubmit button { width: 100%; justify-content: center; }
+  .qsubmit button[disabled] { opacity: 0.6; cursor: not-allowed; }
+  .qnote { grid-column: 1 / -1; font-size: 13px; color: var(--ink-soft); margin: 0; }
+  .qerror { grid-column: 1 / -1; color: #B3261E; font-size: 14px; margin: 0; }
+  .qdone {
+    background: #fff; border: 1.5px solid var(--line); border-left: 4px solid #16A34A;
+    border-radius: 10px; padding: 26px 28px;
+  }
+  .qdone h3 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+  .qdone p { margin: 0; color: var(--ink-soft); }
+  @media (max-width: 640px) { .qform { grid-template-columns: 1fr; } }
+
   footer {
     padding: 24px 0 30px; font-size: 13px; color: var(--ink-soft);
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
@@ -151,14 +189,14 @@
 
   <div class="topbar">
     <div class="wrap">
-      <a href="tel:16562840503">Call us: (656) 284-0503</a>
+      <a href="tel:18134330777">Call us: (813) 433-0777</a>
     </div>
   </div>
 
   <div class="wrap">
     <nav>
       <img src="shrewd-logo.png" class="nav-logo" alt="Shrewd Insurance">
-      <a href="#contact" class="nav-cta">Get a quote</a>
+      <a href="#quote" class="nav-cta">Get a quote</a>
     </nav>
   </div>
 
@@ -168,7 +206,7 @@
         <div class="eyebrow">Multi-State Personal &amp; Commercial Insurance</div>
         <h1>Get the <em>right</em> policy.<br>Not just <em>a</em> policy.</h1>
         <p class="lede">Comparing coverage across more than forty carriers so you don't have to — matched honestly to what you actually need.</p>
-        <a href="#contact" class="btn btn-primary">Get a quote &rarr;</a>
+        <a href="#quote" class="btn btn-primary">Get a quote &rarr;</a>
         <div class="creds">
           <span class="cred"><span class="dot"></span> 14 years licensed</span>
           <span class="cred"><span class="dot"></span> Property &amp; Casualty producer</span>
@@ -286,13 +324,78 @@
           </div>
           <div class="contact-item">
             <div class="ci-label">Phone</div>
-            <a href="tel:16562840503">(656) 284-0503</a>
+            <a href="tel:18134330777">(813) 433-0777</a>
+          </div>
+          <div class="contact-item">
+            <div class="ci-label">Text</div>
+            <a href="sms:+18134330777">Send a text</a>
           </div>
           <div class="contact-item">
             <div class="ci-label">Email</div>
             <a href="mailto:Jessicarider@shrewdinsurance.com">Jessicarider@shrewdinsurance.com</a>
           </div>
-          <a href="tel:16562840503" class="btn btn-primary">Call for a quote</a>
+          <a href="tel:18134330777" class="btn btn-primary">Call for a quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="quote-section" id="quote">
+    <div class="wrap">
+      <div class="quote-inner">
+        <h2>Request a quote</h2>
+        <p class="quote-sub">Email is all I need to get started — everything else just helps me shop faster.</p>
+
+        <form class="qform" id="quote-form" novalidate>
+          <div class="qfield full">
+            <label for="q-email">Email <span class="req">*</span></label>
+            <input type="email" id="q-email" name="email" required autocomplete="email" placeholder="you@yourbusiness.com">
+          </div>
+          <div class="qfield">
+            <label for="q-name">Name</label>
+            <input type="text" id="q-name" name="full_name" autocomplete="name" placeholder="Optional">
+          </div>
+          <div class="qfield">
+            <label for="q-phone">Phone</label>
+            <input type="tel" id="q-phone" name="phone" autocomplete="tel" placeholder="Optional">
+          </div>
+          <div class="qfield">
+            <label for="q-business">Business name</label>
+            <input type="text" id="q-business" name="business_name" placeholder="Optional">
+          </div>
+          <div class="qfield">
+            <label for="q-insuring">What are you insuring?</label>
+            <select id="q-insuring" name="insuring">
+              <option value="">Optional &mdash; select one</option>
+              <option>Business / commercial</option>
+              <option>Home</option>
+              <option>Auto</option>
+              <option>Flood</option>
+              <option>Renters</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="qfield full">
+            <label for="q-message">Anything I should know?</label>
+            <textarea id="q-message" name="message" placeholder="Optional &mdash; current carrier, renewal date, what you're worried about..."></textarea>
+          </div>
+
+          <div class="qhp" aria-hidden="true">
+            <label for="q-website">Leave this blank</label>
+            <input type="text" id="q-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="qerror" id="q-error" style="display:none;"></p>
+          <div class="qsubmit">
+            <button type="submit" class="btn btn-primary" id="q-submit">Send my request</button>
+          </div>
+          <p class="qnote">Goes straight to me. No autodialers, no selling your info to anyone.</p>
+        </form>
+
+        <div class="qdone" id="quote-done" style="display:none;">
+          <h3>Got it &mdash; thank you.</h3>
+          <p>Your request landed with me directly. I&rsquo;ll be in touch shortly. If it&rsquo;s urgent, call or text <a href="tel:18134330777">(813) 433-0777</a>.</p>
         </div>
       </div>
     </div>
@@ -346,5 +449,84 @@
 .c-vortex{width:102px;background-image:url(data:image/webp;base64,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)}
 .c-wright-flood{width:102px;background-image:url(data:image/webp;base64,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)}
 </style>
+
+<script>
+(function () {
+  // The anon key is meant to be public. Safety comes from row-level security:
+  // this table grants anon INSERT only, and every other table is
+  // authenticated-only, so nothing here can read your data back out.
+  var SUPABASE_URL = "https://idlzpsktzibpzeqymnnc.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkbHpwc2t0emlicHplcXltbm5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2Njc4ODksImV4cCI6MjEwMDI0Mzg4OX0.XxgXYC2U-y4N3E6m6pX9h-0zXt4fb4MtQPQdK3tZAbo";
+
+  var form = document.getElementById("quote-form");
+  var done = document.getElementById("quote-done");
+  var errEl = document.getElementById("q-error");
+  var btn = document.getElementById("q-submit");
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.style.display = "block";
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    errEl.style.display = "none";
+
+    var email = document.getElementById("q-email").value.trim();
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      showError("Please enter a valid email address so I can reach you.");
+      document.getElementById("q-email").focus();
+      return;
+    }
+
+    // Honeypot: a real visitor never sees this field, so anything in it is a bot.
+    // Show the success state anyway rather than telling the bot it failed.
+    if (document.getElementById("q-website").value) {
+      form.style.display = "none";
+      done.style.display = "block";
+      return;
+    }
+
+    var val = function (id) {
+      var v = document.getElementById(id).value.trim();
+      return v === "" ? null : v;
+    };
+
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    try {
+      var res = await fetch(SUPABASE_URL + "/rest/v1/quote_requests", {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+          email: email,
+          full_name: val("q-name"),
+          phone: val("q-phone"),
+          business_name: val("q-business"),
+          insuring: val("q-insuring"),
+          message: val("q-message"),
+          source_page: location.pathname || "/"
+        })
+      });
+
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      form.style.display = "none";
+      done.style.display = "block";
+      done.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "Send my request";
+      showError("Something went wrong sending that. Please call or text (813) 433-0777 and I'll take care of it.");
+    }
+  });
+})();
+</script>
 </body>
 </html>
